@@ -139,6 +139,33 @@ public class Main {
                     experimento.borrarPoblacionBacterias(nombrePoblacionBorrar);
                     break;
                 case "3":
+                    boolean exit = true;
+                    while (exit) {
+                        System.out.println("1. Ordenados por fecha de inicio");
+                        System.out.println("2. Ordenados por nombre");
+                        System.out.println("3. Ordenados por número inicial de bacterias");
+                        System.out.println("Escoja el criterio de ordenamiento: ");
+                        String criterio = sc.nextLine();
+
+                        switch (criterio) {
+                            case "1":
+                                experimento.ordenarPoblacionesPorFechaInicio();
+                                exit = false;
+                                break;
+                            case "2":
+                                experimento.ordenarPoblacionesPorNombre();
+                                exit = false;
+                                break;
+                            case "3":
+                                experimento.ordenarPoblacionesPorNumInicialBacterias();
+                                exit = false;
+                                break;
+                            default:
+                                System.out.println("Opción no válida");
+                                break;
+                        }
+                    }
+
                     System.out.println("Nombres de las poblaciones de bacterias de este experimento: ");
                     experimento.visualizarNombresPoblaciones();
                     break;

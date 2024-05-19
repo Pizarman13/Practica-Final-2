@@ -109,6 +109,41 @@ public class Experimento implements Serializable{
         }
     }
 
+    public void ordenarPoblacionesPorFechaInicio() {
+        for (int i = 0; i < poblacionBacteriana.length - 1; i++) {
+            for (int j = 0; j < poblacionBacteriana.length - i - 1; j++) {
+                if (poblacionBacteriana[j].fechaInicio.isAfter(poblacionBacteriana[j + 1].fechaInicio)) {
+                    PoblacionBacterias aux = poblacionBacteriana[j];
+                    poblacionBacteriana[j] = poblacionBacteriana[j + 1];
+                    poblacionBacteriana[j + 1] = aux;
+                }
+            }
+        }
+    }
+
+    public void ordenarPoblacionesPorNombre() {
+        for (int i = 0; i < poblacionBacteriana.length - 1; i++) {
+            for (int j = 0; j < poblacionBacteriana.length - i - 1; j++) {
+                if (poblacionBacteriana[j].nombre.compareTo(poblacionBacteriana[j + 1].nombre) > 0) {
+                    PoblacionBacterias aux = poblacionBacteriana[j];
+                    poblacionBacteriana[j] = poblacionBacteriana[j + 1];
+                    poblacionBacteriana[j + 1] = aux;
+                }
+            }
+        }
+    }
+
+    public void ordenarPoblacionesPorNumInicialBacterias() {
+        for (int i = 0; i < poblacionBacteriana.length - 1; i++) {
+            for (int j = 0; j < poblacionBacteriana.length - i - 1; j++) {
+                if (poblacionBacteriana[j].numInicialBacterias > poblacionBacteriana[j + 1].numInicialBacterias) {
+                    PoblacionBacterias aux = poblacionBacteriana[j];
+                    poblacionBacteriana[j] = poblacionBacteriana[j + 1];
+                    poblacionBacteriana[j + 1] = aux;
+                }
+            }
+        }
+    }
     public void visualizarNombresPoblaciones() {
         for (int i = 0; i < poblacionBacteriana.length; i++) {
             System.out.println(poblacionBacteriana[i].nombre);
