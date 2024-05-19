@@ -32,7 +32,7 @@ public class Main {
                     case "2":
                         System.out.println("Introduzca el nombre del experimento que desea crear: ");
                         String nombreArchivoEx = sc.nextLine();
-                        Experimento nuevoExperimento = new Experimento(147, new PoblacionBacterias[0]);
+                        Experimento nuevoExperimento = new Experimento(147, new PoblacionBacterias[0], 30);
                         abrirExperimento(nuevoExperimento);
                         break;
                     case "0":
@@ -49,10 +49,40 @@ public class Main {
 
     public static void abrirExperimento(Experimento experimento) {
 
-        System.out.println("Escoja el dia a partir del cual dejara de incrementarse la comida y empezara a disminuir: ");
-        int dia = sc.nextInt();
-        experimento.regulacionLinealComida(dia);
+        boolean s = true;
+        while(s) {
+            System.out.println("1. Crecimiento y decrecimiento lineal de la comida");
+            System.out.println("2. Comida constante para todos los días");
+            System.out.println("3. Comida creciente para todos los días");
+            System.out.println("4. Comida constante para los dias impares");
+            System.out.println("Escoja el metodo de implementacion de la comida: ");
 
+            String opcion = sc.nextLine();
+            switch(opcion) {
+                case "1":
+                    System.out.println("Escoja el dia a partir del cual dejara de incrementarse la comida y empezara a disminuir: ");
+                    int dia = sc.nextInt();
+                    experimento.crecimientoDecrecimientoComida(dia, experimento.getDuracionExperimento());
+                    s = false;
+                    break;
+                case "2":
+                    experimento.comidaConstante(4000);
+                    s = false;
+                    break;
+                case "3":
+                    experimento.comidaCreciente();
+                    s = false;
+                    break;
+                case "4":
+                    experimento.comidaImpar(7000);
+                    s = false;
+                    break;
+                default:
+                    System.out.println("Opción no válida");
+                    break;
+            }
+
+        }
 
        while(true) {
             System.out.println("1. Crear una nueva población de bacterias y  añadirla a este experimento");

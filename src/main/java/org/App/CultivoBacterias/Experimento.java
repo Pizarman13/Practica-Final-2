@@ -5,21 +5,28 @@ import java.io.*;
 public class Experimento implements Serializable{
 
     int idExperimento;
-    int maxComida = 300;
-    int[] cantidadComida = new int[30];
+    int maxComida = 300000;
+    int[] cantidadComida;
     PoblacionBacterias[] poblacionBacteriana;
     String nombreArchivo;
+    int duracionExperimento;
 
-    public Experimento(int idExperimento, PoblacionBacterias[] poblacionBacteriana) {
+    public Experimento(int idExperimento, PoblacionBacterias[] poblacionBacteriana, int duracionExperimento) {
         this.idExperimento = idExperimento;
         this.poblacionBacteriana = poblacionBacteriana;
+        this.duracionExperimento = duracionExperimento;
+        this.cantidadComida = new int[duracionExperimento];
     }
 
-    public void regulacionLinealComida(int dia) {
-        if (dia > 1 && dia < 30) {
+    public int getDuracionExperimento() {
+        return duracionExperimento;
+    }
+
+    public void crecimientoDecrecimientoComida(int dia, int duracionExperimento) {
+        if (dia > 1 && dia < duracionExperimento) {
 
             for (int i = 0; i < dia; i++) {
-                cantidadComida[i] = i*4 + 40;
+                cantidadComida[i] = i*6 + 4000;
 
                 if (cantidadComida[i] > maxComida) {
                     cantidadComida[i] = maxComida;
@@ -27,13 +34,41 @@ public class Experimento implements Serializable{
             }
 
             for (int i = dia; i < cantidadComida.length; i++) {
-                cantidadComida[i] = i*4 - 20;
+                cantidadComida[i] = i*6 - 1000;
 
                 if (cantidadComida[i] < 0) {
                     cantidadComida[i] = 0;
                 }
             }
 
+        }
+    }
+
+    public void comidaConstante(int cantidad) {
+        for (int i = 0; i < cantidadComida.length; i++) {
+            cantidadComida[i] = cantidad;
+
+            if (cantidadComida[i] > maxComida) {
+                cantidadComida[i] = maxComida;
+            }
+        }
+    }
+
+    public void comidaCreciente() {
+        for (int i = 0; i < cantidadComida.length; i++) {
+            cantidadComida[i] = i*4 + 3000;
+
+            if (cantidadComida[i] > maxComida) {
+                cantidadComida[i] = maxComida;
+            }
+        }
+    }
+
+    public void comidaImpar(int cantidad) {
+        for (int i = 0; i < cantidadComida.length; i++) {
+            if (i % 2 != 0) {
+                cantidadComida[i] = cantidad;
+            }
         }
     }
 
