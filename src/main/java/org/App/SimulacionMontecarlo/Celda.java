@@ -6,7 +6,7 @@ public class Celda {
     public int Comida;
 
     public Celda() {
-        this.numBacterias = 0;
+        this.nBacterias = 0;
         this.Comida = 0;
     }
 }

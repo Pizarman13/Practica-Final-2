@@ -258,4 +258,19 @@ public class Main {
             }
         }
     }
+
+    public void moverBacteria(PlatoCultivo pc, int i, int j) {
+        int[][] movimientos = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+        int[] movimiento = movimientos[new Random().nextInt(movimientos.length)]; // selecciona un movimiento aleatorio
+
+        int nuevoI = i + movimiento[0];
+        int nuevoJ = j + movimiento[1];
+
+        // Verifica si la nueva posicion enta dentro del plato de cultivo
+        if (nuevoI >= 0 && nuevoI < pc.celdas.length && nuevoJ >= 0 && nuevoJ < pc.celdas[nuevoI].length) {
+            pc.celdas[nuevoI][nuevoJ].nBacterias += 1;
+            pc.celdas[i][j].nBacterias -= 1;
+        }
+    }
+
 }
