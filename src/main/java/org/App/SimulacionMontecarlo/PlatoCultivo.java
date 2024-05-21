@@ -1,7 +1,7 @@
 package org.App.SimulacionMontecarlo;
 
 public class PlatoCultivo {
-    Celda[][] celdas = new Celda[20][20];
+    public Celda[][] celdas = new Celda[20][20];
 
     public PlatoCultivo() {
         for (int i = 0; i < celdas.length; i++) {

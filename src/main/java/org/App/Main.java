@@ -2,8 +2,10 @@ package org.App;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Random;
 import java.util.Scanner;
 import org.App.CultivoBacterias.*;
+import org.App.SimulacionMontecarlo.*;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -197,4 +199,63 @@ public class Main {
 
     }
 
+    public void IniciarSimuladorMontecarlo(PlatoCultivo platoCultivo, int comidaInicial, int numBacterias) {
+
+        int comidaXCelda = comidaInicial / 400;
+        for (Celda[] fila : platoCultivo.celdas) {
+            for (Celda celda : fila) {
+                celda.Comida = comidaXCelda;
+            }
+        }
+
+        int inicio = platoCultivo.celdas.length / 2 - 2;
+        int bacteriaXCeldaInicial = numBacterias / 16;
+        for (int i = inicio; i < inicio + 4; i++) {
+            for (int j = inicio; j < inicio + 4; j++) {
+                platoCultivo.celdas[i][j].nBacterias = bacteriaXCeldaInicial;
+            }
+        }
+    }
+
+    public void simularDia(PlatoCultivo platocultivo) {
+        Random rand = new Random();
+
+        for (int z = 1; z <= 10; z++) {
+            for (int i = 0; i < platocultivo.celdas.length; i++) {
+                for (int j = 0; j < platocultivo.celdas[i].length; j++) {
+                    Celda celdaActual = platocultivo.celdas[i][j];
+                    int numBacteriasIniciales = celdaActual.nBacterias;
+
+                    for (int k = 0; k < numBacteriasIniciales; k++) {
+                        int destino = rand.nextInt(100);
+
+                        if (celdaActual.Comida >= 100) {
+                            celdaActual.Comida -= 20; // la bacteria come
+
+                            if (destino < 3) {
+                                celdaActual.nBacterias--; // la bacteria muere
+                            } else if (destino >= 60) {
+                                moverBacteria(platocultivo, i, j);
+                            }
+
+                        } else if(celdaActual.Comida >= 10) {
+                            celdaActual.Comida -= 10; // la bacteria come
+
+                            if (destino < 6) {
+                                celdaActual.nBacterias--; // la bacteria muere
+                            } else if (destino > 20) {
+                                moverBacteria(platocultivo, i, j);
+                            }
+                        } else {
+                            if (destino < 20) {
+                                celdaActual.nBacterias--; // la bacteria muere
+                            } else if( destino > 60){
+                                moverBacteria(platocultivo, i, j);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
