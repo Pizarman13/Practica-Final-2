@@ -14,7 +14,7 @@ public class Experimento implements Serializable{
     public Experimento(int idExperimento, PoblacionBacterias[] poblacionBacteriana, int duracionExperimento) {
         this.idExperimento = idExperimento;
         this.poblacionBacteriana = poblacionBacteriana;
-        this.duracionExperimento = duracionExperimento;
+        this.duracionExperimento = (duracionExperimento > 0) ? duracionExperimento : 30;
         this.cantidadComida = new int[duracionExperimento];
     }
 
@@ -192,5 +192,7 @@ public class Experimento implements Serializable{
             return null;
         }
     }
+
+
 
 }
