@@ -7,7 +7,10 @@ public class Celda {
     public Bacteria[] bacterias;
 
     public Celda() {
-        this.nBacterias = 0;
         this.Comida = 0;
+    }
+
+    public int getnBacterias() {
+        return bacterias.length;
     }
 }
