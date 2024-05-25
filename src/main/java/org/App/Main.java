@@ -201,6 +201,7 @@ public class Main {
 
     public void IniciarSimuladorMontecarlo(PlatoCultivo platoCultivo, int comidaInicial, int numBacterias) {
 
+        
         int comidaXCelda = comidaInicial / 400;
         for (Celda[] fila : platoCultivo.celdas) {
             for (Celda celda : fila) {
@@ -272,5 +273,7 @@ public class Main {
             pc.celdas[i][j].nBacterias -= 1;
         }
     }
+
+
 
 }
