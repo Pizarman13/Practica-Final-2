@@ -1,5 +1,7 @@
 package org.App.SimulacionMontecarlo;
 
+import java.util.Random;
+
 public class PlatoCultivo {
     public Celda[][] celdas = new Celda[20][20];
 
@@ -36,10 +38,30 @@ public class PlatoCultivo {
                     Celda celda = this.celdas[i][j];
                     for (Bacteria bacteria: celda.bacterias) {
                         bacteria.comerYmoverse(celda);
+                        if (bacteria.viva && bacteria.moverse) {
+                            moverBacteria(i, j, bacteria);
+                        }
                     }
                 }
             }
         }
 
+    }
+
+    public void moverBacteria(int i, int j, Bacteria bc) {
+        int[][] movimientos = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+        int[] movimiento = movimientos[new Random().nextInt(movimientos.length)]; // selecciona un movimiento aleatorio
+
+        int nuevoI = i + movimiento[0];
+        int nuevoJ = j + movimiento[1];
+
+        // Verifica si la nueva posicion enta dentro del plato de cultivo
+        if (nuevoI >= 0 && nuevoI < this.celdas.length && nuevoJ >= 0 && nuevoJ < this.celdas[nuevoI].length) {
+            return;
+        }
+
+        // Mueve la bacteria a la nueva posicion
+        this.celdas[nuevoI][nuevoJ].bacterias.add(bc);
+        this.celdas[i][j].bacterias.remove(bc);
     }
 }
