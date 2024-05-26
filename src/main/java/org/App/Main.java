@@ -199,25 +199,6 @@ public class Main {
 
     }
 
-    public void IniciarSimuladorMontecarlo(PlatoCultivo platoCultivo, int comidaInicial, int numBacterias) {
-
-
-        int comidaXCelda = comidaInicial / 400;
-        for (Celda[] fila : platoCultivo.celdas) {
-            for (Celda celda : fila) {
-                celda.Comida = comidaXCelda;
-            }
-        }
-
-        int inicio = platoCultivo.celdas.length / 2 - 2;
-        int bacteriaXCeldaInicial = numBacterias / 16;
-        for (int i = inicio; i < inicio + 4; i++) {
-            for (int j = inicio; j < inicio + 4; j++) {
-                platoCultivo.celdas[i][j].nBacterias = bacteriaXCeldaInicial;
-            }
-        }
-    }
-
     public void simularDia(PlatoCultivo platocultivo) {
         Random rand = new Random();
 
