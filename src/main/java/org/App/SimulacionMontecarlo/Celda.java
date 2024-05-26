@@ -6,7 +6,7 @@ public class Celda {
 
 
     public int Comida;
-    public LinkedList<Bacteria> bacterias = new LinkedList<Bacteria>();
+    public LinkedList<Bacteria> bacterias;
     public int futurasBacterias;
 
     public Celda() {

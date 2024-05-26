@@ -2,10 +2,11 @@ package org.App;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Random;
 import java.util.Scanner;
 import org.App.CultivoBacterias.*;
 import org.App.SimulacionMontecarlo.*;
+import java.util.LinkedList;
+
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -94,7 +95,8 @@ public class Main {
             System.out.println("5. Guardar el experimento");
             System.out.println("6. Guardar el experimento como");
             System.out.println("7. Ver la cantidad de comida para cada día del experimento");
-            System.out.println("8. Salir");
+            System.out.println("8. Simulacion de Montecarlo");
+            System.out.println("9. Salir");
 
             System.out.print("Ingrese una opcion: ");
             String opcion = sc.nextLine();
@@ -188,6 +190,33 @@ public class Main {
                     experimento.visualizarComida();
                     break;
                 case "8":
+
+                    System.out.println("Introduzca el número de bacterias que desea en el plato de cultivo: ");
+                    int numBacterias = sc.nextInt();
+                    System.out.println("Introduzca el número de días que desea simular: ");
+                    int numDias = sc.nextInt();
+                    System.out.println("Introduzca la cantidad de comida inicial: ");
+                    int comidaInicial = sc.nextInt();
+
+                    PlatoCultivo plato = new PlatoCultivo(numBacterias);
+                    for (int i = 0; i < numDias; i++) {
+                        plato.simularDia(comidaInicial);
+                    }
+
+                    // Visualizar la cantidad de bacterias y comida en cada celda
+                    for (int i = 0; i < plato.celdas.length; i++) {
+                        for (int j = 0; j < plato.celdas[i].length; j++) {
+                            System.out.print(" Celda [" + i + "][" + j + "]: ");
+                            System.out.print(" Comida: " + plato.celdas[i][j].Comida);
+                            System.out.print(" Bacterias: " + plato.celdas[i][j].bacterias.size());
+                        }
+                        System.out.println();
+                    }
+
+                    System.out.println("Simulación terminada");
+
+                    break;
+                case "9":
                     System.out.println("Saliendo...");
                     System.exit(0);
                     break;
@@ -198,8 +227,5 @@ public class Main {
         }
 
     }
-
-
-
 
 }

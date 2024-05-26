@@ -5,18 +5,11 @@ import java.util.Random;
 public class PlatoCultivo {
     public Celda[][] celdas = new Celda[20][20];
 
-    public PlatoCultivo(int comidaInicial, int numBacterias){
+    public PlatoCultivo(int numBacterias){
 
         for (int i = 0; i < celdas.length; i++) {
             for (int j = 0; j < celdas[i].length; j++) {
                 celdas[i][j] = new Celda();
-            }
-        }
-
-        int comidaXCelda = comidaInicial / 400;
-        for (Celda[] fila : this.celdas) {
-            for (Celda celda : fila) {
-                celda.Comida += comidaXCelda;
             }
         }
 
@@ -31,7 +24,13 @@ public class PlatoCultivo {
         }
     }
 
-    public void simularDia() {
+    public void simularDia(int comidaInicial) {
+        int comidaXCelda = comidaInicial / 400;
+        for (Celda[] fila : this.celdas) {
+            for (Celda celda : fila) {
+                celda.Comida += comidaXCelda;
+            }
+        }
         for (int z = 1; z <= 10; z++) {
             for (int i = 0; i < this.celdas.length; i++) {
                 for (int j = 0; j < this.celdas[i].length; j++) {
@@ -41,11 +40,8 @@ public class PlatoCultivo {
                         if (bacteria.viva && bacteria.moverse) {
                             moverBacteria(i, j, bacteria);
                         }
-                        // eliminar bacterias muertas
-                        if (!bacteria.viva) {
-                            celda.bacterias.remove(bacteria);
-                        }
                     }
+                    celda.bacterias.removeIf(b -> !b.viva);
                 }
             }
         }
