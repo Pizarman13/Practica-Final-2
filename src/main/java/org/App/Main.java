@@ -201,7 +201,7 @@ public class Main {
 
     public void IniciarSimuladorMontecarlo(PlatoCultivo platoCultivo, int comidaInicial, int numBacterias) {
 
-        
+
         int comidaXCelda = comidaInicial / 400;
         for (Celda[] fila : platoCultivo.celdas) {
             for (Celda celda : fila) {
@@ -227,29 +227,38 @@ public class Main {
                     Celda celdaActual = platocultivo.celdas[i][j];
                     int numBacteriasIniciales = celdaActual.nBacterias;
 
-                    for (int k = 0; k < numBacteriasIniciales; k++) {
+                    celdaActual.bacterias = new Bacteria[numBacteriasIniciales];
+
+                    for (int k = 0; k < celdaActual.bacterias.length; k++) {
                         int destino = rand.nextInt(100);
 
                         if (celdaActual.Comida >= 100) {
-                            celdaActual.Comida -= 20; // la bacteria come
+                            // la bacteria come
+                            celdaActual.Comida -= 20;
+                            celdaActual.bacterias[k].comidaConsumida += 20;
 
                             if (destino < 3) {
-                                celdaActual.nBacterias--; // la bacteria muere
+                                // la bacteria muere
+                                celdaActual.nBacterias--;
                             } else if (destino >= 60) {
                                 moverBacteria(platocultivo, i, j);
                             }
 
                         } else if(celdaActual.Comida >= 10) {
-                            celdaActual.Comida -= 10; // la bacteria come
+                            // la bacteria come
+                            celdaActual.Comida -= 10;
+                            celdaActual.bacterias[k].comidaConsumida += 10;
 
                             if (destino < 6) {
-                                celdaActual.nBacterias--; // la bacteria muere
+                                // la bacteria muere
+                                celdaActual.nBacterias--;
                             } else if (destino > 20) {
                                 moverBacteria(platocultivo, i, j);
                             }
                         } else {
                             if (destino < 20) {
-                                celdaActual.nBacterias--; // la bacteria muere
+                                // la bacteria muere
+                                celdaActual.nBacterias--;
                             } else if( destino > 60){
                                 moverBacteria(platocultivo, i, j);
                             }
