@@ -41,4 +41,15 @@ public class Bacteria {
             }
         }
     }
+
+    public void reproducirse(Celda celda) {
+        if (this.comidaConsumida >= 150) {
+            celda.futurasBacterias += 3;
+        } else if (this.comidaConsumida >= 100) {
+            celda.futurasBacterias += 2;
+        } else if (this.comidaConsumida >= 50) {
+            celda.futurasBacterias += 1;
+        }
+        this.comidaConsumida = 0;
+    }
 }

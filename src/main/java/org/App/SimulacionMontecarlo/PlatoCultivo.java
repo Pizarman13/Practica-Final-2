@@ -41,8 +41,24 @@ public class PlatoCultivo {
                         if (bacteria.viva && bacteria.moverse) {
                             moverBacteria(i, j, bacteria);
                         }
+                        // eliminar bacterias muertas
+                        if (!bacteria.viva) {
+                            celda.bacterias.remove(bacteria);
+                        }
                     }
                 }
+            }
+        }
+
+        for (Celda[] fila : this.celdas) {
+            for (Celda celda : fila) {
+                for (Bacteria bacteria : celda.bacterias) {
+                    bacteria.reproducirse(celda);
+                }
+                for (int i = 0; i < celda.futurasBacterias; i++) {
+                    celda.bacterias.add(new Bacteria());
+                }
+                celda.futurasBacterias = 0;
             }
         }
 
