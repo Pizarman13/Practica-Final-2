@@ -28,4 +28,18 @@ public class PlatoCultivo {
             }
         }
     }
+
+    public void simularDia() {
+        for (int z = 1; z <= 10; z++) {
+            for (int i = 0; i < this.celdas.length; i++) {
+                for (int j = 0; j < this.celdas[i].length; j++) {
+                    Celda celda = this.celdas[i][j];
+                    for (Bacteria bacteria: celda.bacterias) {
+                        bacteria.comerYmoverse(celda);
+                    }
+                }
+            }
+        }
+
+    }
 }
