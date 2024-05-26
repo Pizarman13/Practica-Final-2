@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="PF-1:jar2">
+    <output-path>$PROJECT_DIR$/out/artifacts/PF_1_jar2</output-path>
+    <root id="archive" name="PF-1.jar">
+      <element id="module-output" name="PF-1" />
+    </root>
+  </artifact>
+</component>
